@@ -1,0 +1,27 @@
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
+
+OBJS =		RBT.o RainbowTable.o Database.o ChainesGenerator.o sha1.o
+
+LIBS =  -lsqlite3
+
+TARGET =	RBT
+
+$(TARGET):	$(OBJS)
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+
+RainboTable.o: RainbowTable.cpp
+	$(CXX) -c RainbowTable.cpp
+
+Database.o: Database/Database.cpp
+	$(CXX) -c Database/Database.cpp
+	
+ChainesGenerator.o: ChainesGenerator.cpp
+	$(CXX) -c ChainesGenerator.cpp
+	
+sha1.o: sha1/sha1.c
+	$(CXX) -c sha1/sha1.c
+
+all:	$(TARGET)
+
+clean:
+	rm -f $(OBJS) $(TARGET)
